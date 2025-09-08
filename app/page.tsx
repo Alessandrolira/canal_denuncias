@@ -1,3 +1,42 @@
+"use client";
+
+const handleSubmit = async (event: any) => {
+  event.preventDefault();
+
+  const denuncia = event.target.denuncia.value;
+  const sugestao = event.target.sugestao.value;
+
+  if (!denuncia) {
+    alert("Por favor, preencha o campo de denúncia.");
+    return;
+  }
+
+  const data = {
+    denuncia,
+    sugestao,
+  };
+
+  try {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_KEY!, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `denuncia=${denuncia}&sugestao=${sugestao}`,
+    });
+
+    if (response.ok) {
+      alert("Denúncia enviada com sucesso!");
+      event.target.reset();
+    } else {
+      alert("Erro ao enviar denúncia. Tente novamente mais tarde.");
+    }
+  } catch (error) {
+    console.error("Erro ao enviar denúncia:", error);
+    alert("Erro ao enviar denúncia. Tente novamente mais tarde.");
+  }
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full px-4">
@@ -12,7 +51,10 @@ export default function Home() {
           Aqui, sua voz é respeitada e sua identidade preservada!
         </p>
       </div>
-      <form className="flex flex-col w-full max-w-300 mx-auto">
+      <form
+        className="flex flex-col w-full max-w-300 mx-auto"
+        onSubmit={handleSubmit}
+      >
         <div className="w-full bg-white/80 rounded-lg p-4 md:p-6 mb-12 shadow-2xl backdrop-blur-sm">
           <div className="flex items-center gap-3 bg-[var(--background)]/80 rounded-xl px-4 py-2 shadow-lg mb-6 border border-[var(--background-dark)]">
             <span className="text-white text-2xl">🛡️</span>
@@ -36,6 +78,7 @@ export default function Home() {
             id="denuncia"
             className="w-full bg-gray-100 rounded-md p-3 md:p-4 mt-1 resize-none h-24 md:h-28 focus:outline-none focus:ring-2 focus:ring-[var(--background)] focus:border-transparent placeholder:text-[var(--background)]"
             placeholder="Descreva aqui a situação que deseja denunciar..."
+            required
           />
           <label
             htmlFor="melhorias"
@@ -44,13 +87,16 @@ export default function Home() {
             Sugestões ou ideias para melhorar a situação (opcional)
           </label>
           <textarea
-            name="melhorias"
-            id="melhorias"
+            name="sugestao"
+            id="sugestao"
             className="w-full bg-gray-100 rounded-md p-3 md:p-4 mt-1 resize-none h-24 md:h-28 focus:outline-none focus:ring-2 focus:ring-[var(--background)] focus:border-transparent placeholder:text-[var(--background)]"
             placeholder="Se quiser, compartilhe ideias ou melhorias..."
           />
           <div className="flex justify-end w-full">
-            <button className="bg-[var(--background-dark)] mt-4 py-2 px-8 rounded-br-xl rounded-tl-xl text-white font-bold hover:bg-[#70b8e6] transition-colors cursor-pointer shadow-md">
+            <button
+              className="bg-[var(--background-dark)] mt-4 py-2 px-8 rounded-br-xl rounded-tl-xl text-white font-bold hover:bg-[#70b8e6] transition-colors cursor-pointer shadow-md"
+              type="submit"
+            >
               Enviar
             </button>
           </div>
