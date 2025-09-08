@@ -1,103 +1,60 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col justify-center items-center min-h-screen w-full px-4">
+      <div className="flex flex-col items-center pt-8 pb-6 w-full">
+        <h1 className="text-3xl md:text-4xl font-bold text-white pb-4 text-center drop-shadow-lg">
+          Canal de Denúncias Anônimas
+        </h1>
+        <p className="text-base md:text-lg text-white text-center px-2 md:px-4 mb-2">
+          Você nunca está sozinho(a). Este é um espaço seguro, anônimo e
+          confidencial para compartilhar situações que merecem atenção.
+          <br />
+          Aqui, sua voz é respeitada e sua identidade preservada!
+        </p>
+      </div>
+      <form className="flex flex-col w-full max-w-300 mx-auto">
+        <div className="w-full bg-white/80 rounded-lg p-4 md:p-6 mb-12 shadow-2xl backdrop-blur-sm">
+          <div className="rounded-full shadow-md py-1 px-4 w-full max-w-xs flex items-center justify-start mb-4">
+            <p className="font-bold text-[var(--background)] text-lg text-left">
+              Enviar com segurança
+            </p>
+          </div>
+          <p className="text-sm md:text-md text-[var(--background-dark)] mb-4">
+            Não pedimos seu nome, e-mail ou qualquer informação pessoal. Sua
+            denúncia é totalmente anônima e feita com segurança, para que você
+            se sinta tranquilo(a) ao compartilhar.
+          </p>
+          <label
+            htmlFor="denuncia"
+            className="text-sm text-[var(--background-dark)] font-semibold mb-1"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Descreva sua denúncia
+          </label>
+          <textarea
+            name="denuncia"
+            id="denuncia"
+            className="w-full bg-gray-100 rounded-md p-3 md:p-4 mt-1 resize-none h-24 md:h-28 focus:outline-none focus:ring-2 focus:ring-[var(--background)] focus:border-transparent placeholder:text-[var(--background)]"
+            placeholder="Descreva aqui a situação que deseja denunciar..."
+          />
+          <label
+            htmlFor="melhorias"
+            className="text-sm text-[var(--background-dark)] font-semibold mt-6 mb-1"
           >
-            Read our docs
-          </a>
+            Sugestões ou ideias para melhorar a situação (opcional)
+          </label>
+          <textarea
+            name="melhorias"
+            id="melhorias"
+            className="w-full bg-gray-100 rounded-md p-3 md:p-4 mt-1 resize-none h-24 md:h-28 focus:outline-none focus:ring-2 focus:ring-[var(--background)] focus:border-transparent placeholder:text-[var(--background)]"
+            placeholder="Se quiser, compartilhe ideias ou melhorias..."
+          />
+          <div className="flex justify-end w-full">
+            <button className="bg-[var(--background-dark)] mt-4 py-2 px-8 rounded-br-xl rounded-tl-xl text-white font-bold hover:bg-[#70b8e6] transition-colors cursor-pointer shadow-md">
+              Enviar
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </form>
     </div>
   );
 }
