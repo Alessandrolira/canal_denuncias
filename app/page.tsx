@@ -49,6 +49,16 @@ export default function Home() {
 
   useEffect(() => {}, [loading]);
 
+  useEffect(() => {
+    if (mensagem !== "") {
+      const timer = setTimeout(() => {
+        setMensagem("");
+      }, 10000); // 10 segundos
+
+      return () => clearTimeout(timer);
+    }
+  }, [mensagem]);
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full px-4">
       {mensagem !== "" && (
