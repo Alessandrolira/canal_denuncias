@@ -14,10 +14,11 @@ export default function Home() {
       </div>
       <form className="flex flex-col w-full max-w-300 mx-auto">
         <div className="w-full bg-white/80 rounded-lg p-4 md:p-6 mb-12 shadow-2xl backdrop-blur-sm">
-          <div className="rounded-full shadow-md py-1 px-4 w-full max-w-xs flex items-center justify-start mb-4">
-            <p className="font-bold text-[var(--background)] text-lg text-left">
-              Enviar com segurança
-            </p>
+          <div className="flex items-center gap-3 bg-[var(--background)]/80 rounded-xl px-4 py-2 shadow-lg mb-6 border border-[var(--background-dark)]">
+            <span className="text-white text-2xl">🛡️</span>
+            <span className="text-white font-semibold text-lg">
+              Sua denúncia é protegida e anônima
+            </span>
           </div>
           <p className="text-sm md:text-md text-[var(--background-dark)] mb-4">
             Não pedimos seu nome, e-mail ou qualquer informação pessoal. Sua
