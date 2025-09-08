@@ -56,6 +56,7 @@ export default function Home() {
           </div>
         </div>
       </form>
+      <img src="/Logos.png" alt="" className="w-150 mb-12" />
     </div>
   );
 }
