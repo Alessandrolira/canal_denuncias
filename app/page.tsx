@@ -1,45 +1,65 @@
 "use client";
 
-const handleSubmit = async (event: any) => {
-  event.preventDefault();
-
-  const denuncia = event.target.denuncia.value;
-  const sugestao = event.target.sugestao.value;
-
-  if (!denuncia) {
-    alert("Por favor, preencha o campo de denúncia.");
-    return;
-  }
-
-  const data = {
-    denuncia,
-    sugestao,
-  };
-
-  try {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_KEY!, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `denuncia=${denuncia}&sugestao=${sugestao}`,
-    });
-
-    if (response.ok) {
-      alert("Denúncia enviada com sucesso!");
-      event.target.reset();
-    } else {
-      alert("Erro ao enviar denúncia. Tente novamente mais tarde.");
-    }
-  } catch (error) {
-    console.error("Erro ao enviar denúncia:", error);
-    alert("Erro ao enviar denúncia. Tente novamente mais tarde.");
-  }
-};
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [sucesso, setSucesso] = useState(false);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const denuncia = event.target.denuncia.value;
+    const sugestao = event.target.sugestao.value;
+
+    if (!denuncia) {
+      alert("Por favor, preencha o campo de denúncia.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_KEY!, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `denuncia=${denuncia}&sugestao=${sugestao}`,
+      });
+
+      if (response.ok) {
+        setMensagem("Denúncia enviada com sucesso!");
+        setLoading(false);
+        setSucesso(true);
+        event.target.reset();
+      } else {
+        setLoading(false);
+        setSucesso(false);
+        setMensagem("Erro ao enviar denúncia. Tente novamente mais tarde.");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar denúncia:", error);
+      setLoading(false);
+      setSucesso(false);
+      setMensagem("Erro ao enviar denúncia. Tente novamente mais tarde.");
+    }
+  };
+
+  useEffect(() => {}, [loading]);
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full px-4">
+      {mensagem !== "" && (
+        <div
+          className={`fixed top-4 text-white px-6 py-3 rounded-lg shadow-lg border border-[var(--background-dark)] z-50 ${
+            sucesso ? "bg-green-500" : "bg-red-500"
+          }`}
+        >
+          {mensagem}
+        </div>
+      )}
       <div className="flex flex-col items-center pt-8 pb-6 w-full">
         <h1 className="text-3xl md:text-4xl font-bold text-white pb-4 text-center drop-shadow-lg">
           Canal de Denúncias Anônimas
@@ -96,8 +116,17 @@ export default function Home() {
             <button
               className="bg-[var(--background-dark)] mt-4 py-2 px-8 rounded-br-xl rounded-tl-xl text-white font-bold hover:bg-[#70b8e6] transition-colors cursor-pointer shadow-md"
               type="submit"
+              disabled={loading}
             >
-              Enviar
+              {loading ? (
+                <img
+                  src="/loader.png"
+                  alt="Load"
+                  className="w-[1.5em] animate-spin"
+                />
+              ) : (
+                "Enviar"
+              )}
             </button>
           </div>
         </div>
