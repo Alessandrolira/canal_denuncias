@@ -72,7 +72,7 @@ export default function Home() {
       )}
       <div className="flex flex-col items-center pt-8 pb-6 w-full">
         <h1 className="text-3xl md:text-4xl font-bold text-white pb-4 text-center drop-shadow-lg">
-          Canal de Denúncias Anônimas
+          Canal de escuta segura
         </h1>
         <p className="text-base md:text-lg text-white text-center px-2 md:px-4 mb-2">
           Você nunca está sozinho(a). Este é um espaço seguro, anônimo e
